@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ConsoleApp1
@@ -14,18 +15,24 @@ namespace ConsoleApp1
             var baconTask = FryBaconAsync(3);
             var toastTask = MakeToastWithButterAndJamAsync(2);
 
-            var toast = await toastTask;
-            Console.WriteLine("toast is ready");
-
-            var eggs = await eggsTask;
-            Console.WriteLine("eggs are ready");
-
-            var bacon = await baconTask;
-            Console.WriteLine("bacon is ready");
-
-            Juice oj = PourOJ();
-            Console.WriteLine("oj is ready");
-            Console.WriteLine("Breakfast is ready!");
+            var breakfastTasks = new List<Task> { eggsTask, baconTask, toastTask };
+            while (breakfastTasks.Count > 0)
+            {
+                Task finishedTask = await Task.WhenAny(breakfastTasks);
+                if (finishedTask == eggsTask)
+                {
+                    Console.WriteLine("eggs are ready");
+                }
+                else if (finishedTask == baconTask)
+                {
+                    Console.WriteLine("bacon is ready");
+                }
+                else if (finishedTask == toastTask)
+                {
+                    Console.WriteLine("toast is ready");
+                }
+                breakfastTasks.Remove(finishedTask);
+            }
 
 
         }
