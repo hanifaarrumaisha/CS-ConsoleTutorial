@@ -1,3 +1,3 @@
 # CS-ConsoleTutorial
 
-Check on the commit description for the explanation for each code
+Check each branch and the commit description for the explanation for each code
