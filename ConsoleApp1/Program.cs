@@ -7,22 +7,26 @@ namespace ConsoleApp1
     {
         static async Task Main(string[] args)
         {
-            // This code still work just like the sync one, because
             Coffee cup = PourCoffee();
             Console.WriteLine("coffee is ready");
 
-            Egg eggs = await FryEggsAsync(2);
+            var eggsTask = FryEggsAsync(2);
+            var baconTask = FryBaconAsync(3);
+            var toastTask = MakeToastWithButterAndJamAsync(2);
+
+            var eggs = await eggsTask;
             Console.WriteLine("eggs are ready");
 
-            Bacon bacon = await FryBaconAsync(3);
+            var bacon = await baconTask;
             Console.WriteLine("bacon is ready");
-
-            Toast toast = await MakeToastWithButterAndJamAsync(2);
-            Console.WriteLine("toast is ready");
 
             Juice oj = PourOJ();
             Console.WriteLine("oj is ready");
             Console.WriteLine("Breakfast is ready!");
+
+            var toast = await toastTask;
+            Console.WriteLine("toast is ready");
+
         }
 
         private static Juice PourOJ()
