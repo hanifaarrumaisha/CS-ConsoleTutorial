@@ -14,6 +14,9 @@ namespace ConsoleApp1
             var baconTask = FryBaconAsync(3);
             var toastTask = MakeToastWithButterAndJamAsync(2);
 
+            var toast = await toastTask;
+            Console.WriteLine("toast is ready");
+
             var eggs = await eggsTask;
             Console.WriteLine("eggs are ready");
 
@@ -24,8 +27,6 @@ namespace ConsoleApp1
             Console.WriteLine("oj is ready");
             Console.WriteLine("Breakfast is ready!");
 
-            var toast = await toastTask;
-            Console.WriteLine("toast is ready");
 
         }
 
